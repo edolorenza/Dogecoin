@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        fetchData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -33,7 +34,16 @@ class ViewController: UIViewController {
     }
     
     //MARK: - API
-    
+    private func fetchData(){
+        APICaller.shared.getDogeCoinData { result in
+            switch result {
+            case .success(let data):
+                print("Success: \(data)")
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
     //MARK: - Helpers
     private func configureTableView() {
