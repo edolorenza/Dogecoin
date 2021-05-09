@@ -12,6 +12,9 @@
 		6B68EFEA2647D141008066CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B68EFE92647D141008066CF /* ViewController.swift */; };
 		6B68EFEF2647D143008066CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B68EFEE2647D143008066CF /* Assets.xcassets */; };
 		6B68EFF22647D144008066CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B68EFF02647D144008066CF /* LaunchScreen.storyboard */; };
+		6B68EFFD2647D660008066CF /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B68EFFC2647D660008066CF /* APICaller.swift */; };
+		6B68F0022647E65E008066CF /* DogecoinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B68F0012647E65E008066CF /* DogecoinCell.swift */; };
+		6B68F0072647E705008066CF /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B68F0062647E705008066CF /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		6B68EFEE2647D143008066CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B68EFF12647D144008066CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6B68EFF32647D144008066CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B68EFFC2647D660008066CF /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		6B68F0012647E65E008066CF /* DogecoinCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogecoinCell.swift; sourceTree = "<group>"; };
+		6B68F0062647E705008066CF /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,9 @@
 		6B68EFE42647D141008066CF /* Dogecoin */ = {
 			isa = PBXGroup;
 			children = (
+				6B68F0052647E67E008066CF /* Utils */,
+				6B68F0002647E651008066CF /* View */,
+				6B68EFFB2647D650008066CF /* API */,
 				6B68EFE52647D141008066CF /* AppDelegate.swift */,
 				6B68EFE72647D141008066CF /* SceneDelegate.swift */,
 				6B68EFE92647D141008066CF /* ViewController.swift */,
@@ -62,6 +71,30 @@
 				6B68EFF32647D144008066CF /* Info.plist */,
 			);
 			path = Dogecoin;
+			sourceTree = "<group>";
+		};
+		6B68EFFB2647D650008066CF /* API */ = {
+			isa = PBXGroup;
+			children = (
+				6B68EFFC2647D660008066CF /* APICaller.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		6B68F0002647E651008066CF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6B68F0012647E65E008066CF /* DogecoinCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6B68F0052647E67E008066CF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6B68F0062647E705008066CF /* Extension.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +168,10 @@
 			files = (
 				6B68EFEA2647D141008066CF /* ViewController.swift in Sources */,
 				6B68EFE62647D141008066CF /* AppDelegate.swift in Sources */,
+				6B68F0022647E65E008066CF /* DogecoinCell.swift in Sources */,
+				6B68F0072647E705008066CF /* Extension.swift in Sources */,
 				6B68EFE82647D141008066CF /* SceneDelegate.swift in Sources */,
+				6B68EFFD2647D660008066CF /* APICaller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
