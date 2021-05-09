@@ -7,41 +7,71 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class ViewController: UIViewController {
 
     //MARK: - Properties
     private let reuseIdentifier = "DogecoinCell"
     
-    //MARK: - Lifecycle
+    private let tableView: UITableView = {
+        
+        let table = UITableView()
+        table.register(DogecoinCell.self, forCellReuseIdentifier: "DogecoinCell")
+        return table
+    }()
+
     
+    
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
     }
     
     //MARK: - API
     
     
     //MARK: - Helpers
-    func configureTableView() {
-        tableView.register(DogecoinCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.rowHeight = 64
+    private func configureTableView() {
+        view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+        createTableHeader()
+        
+    }
+    private func createTableHeader() {
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width))
+        header.clipsToBounds = true
+        
+        let imageView = UIImageView(image: UIImage(named: "dogecoin"))
+        imageView.contentMode = .scaleAspectFit
+        let size: CGFloat = view.frame.size.width/3
+        imageView.frame = CGRect(x: (view.frame.width-size)/2, y: 10, width: size, height: size)
+        header.addSubview(imageView)
+        tableView.tableHeaderView = header
     }
     
-
-
 }
 
 
-//MARK: - UITableViewDataSource
-extension ViewController {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
+//MARK: - TableViewDelegate
+extension ViewController: UITableViewDelegate{
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! DogecoinCell
-        return cell
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return 2
+   }
+    
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! DogecoinCell
+       return cell
+   }
 }
 
+//MARK: - TableViewDataSource
+extension ViewController: UITableViewDataSource{
+    
+}

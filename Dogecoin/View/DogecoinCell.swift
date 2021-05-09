@@ -16,6 +16,7 @@ class DogecoinCell: UITableViewCell {
         iv.contentMode = .scaleToFill
         iv.clipsToBounds = true
         iv.backgroundColor = .lightGray
+        iv.image = UIImage(named: "dogecoin")
         return iv
     }()
     
