@@ -47,10 +47,7 @@ final class APICaller {
             
             do {
                 let response = try JSONDecoder().decode(APIResponse.self, from: data)
-                print("\nDEBUG : Api result \(response) ")
                 guard let dogeCoinData = response.data.values.first else { return }
-                
-                
                 completion(.success(dogeCoinData))
                 
             }catch {
