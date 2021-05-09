@@ -110,7 +110,7 @@ struct formatter {
 
     static let dateFormatter: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = .withFractionalSeconds
+        formatter.formatOptions = .withFullDate
         formatter.timeZone = .current
         return formatter
     }()
@@ -119,6 +119,15 @@ struct formatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
+        formatter.dateFormat = "dd-MM-yyyy"
+        return formatter
+    }()
+    
+    
+    static let numberFormatter : NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 0
         return formatter
     }()
 }

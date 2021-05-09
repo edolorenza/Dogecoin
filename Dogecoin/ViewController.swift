@@ -59,9 +59,8 @@ class ViewController: UIViewController {
     private func setUpViewModels() {
         guard let model = data else { return }
         guard let date = formatter.dateFormatter.date(from: model.date_added) else { return }
-        print(date)
-        let edo = formatter.prettyDateFormatter.string(from: date)
-        print(edo)
+        let formatedDate = formatter.prettyDateFormatter.string(from: date)
+        guard let totalSupply = formatter.numberFormatter.string(from: NSNumber(value: model.total_supply)) else { return }
         
         viewModel = [
             DogecoinCellViewModel(
@@ -78,11 +77,11 @@ class ViewController: UIViewController {
             ),
             DogecoinCellViewModel(
                 title: "Date Added",
-                value: String(model.total_supply)
+                value: formatedDate
             ),
             DogecoinCellViewModel(
                 title: "Total Suply",
-                value: formatter.prettyDateFormatter.string(from: date) ?? "N?A"
+                value: totalSupply
             ),
         ]
         configureTableView()
@@ -120,7 +119,6 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(viewModel.count)
         return viewModel.count
    }
     
