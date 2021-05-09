@@ -12,20 +12,18 @@ class ViewController: UIViewController {
     //MARK: - Properties
     private var data: DogeCoinData?
     private let reuseIdentifier = "DogecoinCell"
-    
     private let tableView: UITableView = {
         
-        let table = UITableView()
-        table.register(DogecoinCell.self, forCellReuseIdentifier: "DogecoinCell")
+        let table = UITableView(frame: .zero, style: .grouped)
+        table.register(DogecoinCell.self, forCellReuseIdentifier: DogecoinCell.identifier)
         return table
     }()
 
-    
+    private var viewModel = [DogecoinCellViewModel]()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTableView()
         fetchData()
     }
     
@@ -55,12 +53,39 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         createTableHeader()
-        
     }
     
    
     private func setUpViewModels() {
-        createTableHeader()
+        guard let model = data else { return }
+        guard let date = formatter.dateFormatter.date(from: model.date_added) else { return }
+        print(date)
+        let edo = formatter.prettyDateFormatter.string(from: date)
+        print(edo)
+        
+        viewModel = [
+            DogecoinCellViewModel(
+                title: "Name",
+                value: model.name
+            ),
+            DogecoinCellViewModel(
+                title: "Symbol",
+                value: model.symbol
+            ),
+            DogecoinCellViewModel(
+                title: "Identifier",
+                value: String(model.id)
+            ),
+            DogecoinCellViewModel(
+                title: "Date Added",
+                value: String(model.total_supply)
+            ),
+            DogecoinCellViewModel(
+                title: "Total Suply",
+                value: formatter.prettyDateFormatter.string(from: date) ?? "N?A"
+            ),
+        ]
+        configureTableView()
     }
     
     private func createTableHeader() {
@@ -95,11 +120,17 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return 2
+        print(viewModel.count)
+        return viewModel.count
    }
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! DogecoinCell
+       guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: DogecoinCell.identifier, for: indexPath
+       ) as? DogecoinCell else {
+        fatalError()
+       }
+      cell.configure(with: viewModel[indexPath.row])
        return cell
    }
 }

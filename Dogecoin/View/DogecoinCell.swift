@@ -7,23 +7,28 @@
 
 import UIKit
 
+struct DogecoinCellViewModel {
+    let title: String
+    let value: String
+}
+
 class DogecoinCell: UITableViewCell {
+    
     //MARK: - Properties
+    static let identifier = "DogecoinCell"
     
-    
-    private let imageProperty: UIImageView = {
-       let iv = UIImageView()
-        iv.contentMode = .scaleToFill
-        iv.clipsToBounds = true
-        iv.backgroundColor = .lightGray
-        iv.image = UIImage(named: "dogecoin")
-        return iv
+    private let label: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.text = "label"
+        return label
     }()
     
-    private let labelProperty: UILabel = {
+    private let valueLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.text = "Venom"
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.text = "value label"
+        label.textAlignment = .right
         return label
     }()
     
@@ -31,7 +36,6 @@ class DogecoinCell: UITableViewCell {
     //MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setupView()
     }
     
@@ -40,17 +44,20 @@ class DogecoinCell: UITableViewCell {
     }
     
     func setupView() {
-        addSubview(imageProperty)
-        imageProperty.setDimensions(height: 48, width: 48)
-        imageProperty.layer.cornerRadius = 48 / 2
-        imageProperty.centerY(inView: self, leftAnchor: leftAnchor, paddingLeft: 12)
+    
+        addSubview(label)
+        label.sizeToFit()
+        label.anchor(top: topAnchor, left: leftAnchor, paddingTop: 6, paddingLeft: 16)
         
-        addSubview(labelProperty)
-        labelProperty.anchor(top: topAnchor, left: imageProperty.rightAnchor, paddingLeft: 6)
+        addSubview(valueLabel)
+        valueLabel.sizeToFit()
+        valueLabel.anchor(top: topAnchor, right: rightAnchor, paddingTop: 6, paddingRight: 16)
         
-
     }
     
     //MARK: - Helpers
-  
+    func configure(with viewModel: DogecoinCellViewModel){
+        label.text = viewModel.title
+        valueLabel.text = viewModel.value
+    }
 }

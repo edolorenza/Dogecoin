@@ -107,4 +107,21 @@ struct formatter {
         formatter.numberStyle = .currency
         return formatter
     }()
+
+    static let dateFormatter: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = .withFractionalSeconds
+        formatter.timeZone = .current
+        return formatter
+    }()
+    
+    static let prettyDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
 }
+
+
+

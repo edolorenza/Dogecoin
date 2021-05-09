@@ -18,7 +18,7 @@ struct DogeCoinData: Codable {
     let symbol: String
     let date_added: String
     let tags: [String]
-    let total_supply: Float
+    let total_supply: Double
     let quote: [String: Quote]
 }
 
