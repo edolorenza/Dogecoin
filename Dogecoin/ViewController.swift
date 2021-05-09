@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
     //MARK: - Properties
+    private var data: DogeCoinData?
     private let reuseIdentifier = "DogecoinCell"
     
     private let tableView: UITableView = {
@@ -35,10 +36,13 @@ class ViewController: UIViewController {
     
     //MARK: - API
     private func fetchData(){
-        APICaller.shared.getDogeCoinData { result in
+        APICaller.shared.getDogeCoinData { [weak self] result in
             switch result {
             case .success(let data):
-                print("Success: \(data)")
+                self?.data = data
+                DispatchQueue.main.async {
+                    self?.setUpViewModels()
+                }
             case .failure(let error):
                 print(error)
             }
@@ -53,17 +57,36 @@ class ViewController: UIViewController {
         createTableHeader()
         
     }
+    
+   
+    private func setUpViewModels() {
+        createTableHeader()
+    }
+    
     private func createTableHeader() {
         let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width))
         header.clipsToBounds = true
-        
+        //Header Image
         let imageView = UIImageView(image: UIImage(named: "dogecoin"))
         imageView.contentMode = .scaleAspectFit
         let size: CGFloat = view.frame.size.width/3
         imageView.frame = CGRect(x: (view.frame.width-size)/2, y: 10, width: size, height: size)
         header.addSubview(imageView)
         tableView.tableHeaderView = header
+        
+        //Header price
+        guard let price = data?.quote["USD"]?.price else { return }
+        let number = NSNumber(value: price)
+        let priceCurrency = formatter.currencyFormater.string(from: number)
+        let label = UILabel()
+        label.text = priceCurrency
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 22, weight: .medium)
+        label.frame = CGRect(x: 10, y: 20+size, width: view.frame.width-20, height: 120)
+        header.addSubview(label)
     }
+    
+   
     
 }
 

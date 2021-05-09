@@ -31,9 +31,6 @@ final class APICaller {
             completion(.failure(APIError.invalidUrl))
             return
         }
-        
-        print("API URL : \(url.absoluteString)")
-        
         var requests = URLRequest(url: url)
         requests.setValue(Constants.apiKey, forHTTPHeaderField: Constants.apiKeyHeader)
         requests.httpMethod = "GET"

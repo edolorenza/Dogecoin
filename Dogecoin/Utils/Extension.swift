@@ -97,3 +97,14 @@ extension UIView {
                bottom: view.bottomAnchor, right: view.rightAnchor)
     }
 }
+
+
+
+struct formatter {
+    static let currencyFormater: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.locale = .current
+        formatter.numberStyle = .currency
+        return formatter
+    }()
+}
